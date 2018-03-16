@@ -158,7 +158,7 @@ services:
     charm: cs:ceph-osd-257
     num_units: 3
     options:
-      osd-devices: /dev/sdb
+      osd-devices: /dev/sdc
       osd-reformat: 'yes'
       source: cloud:xenial-queens
     to:
@@ -245,59 +245,59 @@ services:
     charm: cs:neutron-api-258
     num_units: 1
     options:
-      flat-network-providers: physnet1
+      flat-network-providers: physnet1 external
       neutron-security-groups: true
       openstack-origin: cloud:xenial-queens
       worker-multiplier: 0.25
     to:
     - lxd:1
   neutron-gateway:
-    bridge-mappings: physnet1:br-data external:br-ex
-    data-port: br-data:eno1 br-ex:eno2
-    neutron-api:
-        flat-network-providers: physnet1 external
     annotations:
       gui-x: '0'
       gui-y: '0'
     charm: cs:neutron-gateway-247
     num_units: 1
     options:
-      openstack-origin: cloud:xenial-queens
-      worker-multiplier: 0.25
+        bridge-mappings: physnet1:br-data external:br-ex
+        data-port: br-data:eno1 br-ex:eno2
+        flat-network-providers: physnet1 external
+        openstack-origin: cloud:xenial-queens
+        worker-multiplier: 0.25
     to:
     - '0'
   neutron-openvswitch:
-    bridge-mappings: physnet1:br-data external:br-ex
-    data-port:br-data:eno1 br-ex:eno2
-    neutron-api:
-        flat-network-providers:physnet1 external
     annotations:
       gui-x: '250'
       gui-y: '500'
     charm: cs:neutron-openvswitch-249
     num_units: 0
+    options:
+        bridge-mappings: physnet1:br-data external:br-ex
+        data-port:br-data:eno1 br-ex:eno2
+        flat-network-providers:physnet1 external
   nova-cloud-controller:
-    console-access-protocol: novnc and vnc
-    console-keymap: it-it
     annotations:
       gui-x: '0'
       gui-y: '500'
     charm: cs:nova-cloud-controller-306
     num_units: 1
     options:
+      console-access-protocol: novnc and vnc
+      console-keymap: it-it
       network-manager: Neutron
       openstack-origin: cloud:xenial-queens
       worker-multiplier: 0.25
     to:
     - lxd:2
-  nova-compute:
-    flat-interface: eno1
+
+nova-compute:
     annotations:
       gui-x: '250'
       gui-y: '250'
     charm: cs:nova-compute-282
     num_units: 3
     options:
+      flat-interface: eno1
       config-flags: default_ephemeral_format=ext4
       enable-live-migration: true
       enable-resize: true
