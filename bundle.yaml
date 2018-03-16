@@ -280,7 +280,7 @@ services:
     charm: cs:nova-cloud-controller-306
     num_units: 1
     options:
-      console-access-protocol: novnc and vnc
+      console-access-protocol: vnc
       console-keymap: it-it
       network-manager: Neutron
       openstack-origin: cloud:xenial-queens
