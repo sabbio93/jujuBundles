@@ -260,7 +260,6 @@ services:
     options:
         bridge-mappings: physnet1:br-data external:br-ex
         data-port: br-data:eno1 br-ex:eno2
-        flat-network-providers: physnet1 external
         openstack-origin: cloud:xenial-queens
         worker-multiplier: 0.25
     to:
@@ -274,7 +273,6 @@ services:
     options:
         bridge-mappings: physnet1:br-data external:br-ex
         data-port:br-data:eno1 br-ex:eno2
-        flat-network-providers:physnet1 external
   nova-cloud-controller:
     annotations:
       gui-x: '0'
@@ -289,8 +287,7 @@ services:
       worker-multiplier: 0.25
     to:
     - lxd:2
-
-nova-compute:
+ nova-compute:
     annotations:
       gui-x: '250'
       gui-y: '250'
