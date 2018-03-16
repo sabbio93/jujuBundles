@@ -272,7 +272,7 @@ services:
     num_units: 0
     options:
         bridge-mappings: physnet1:br-data external:br-ex
-        data-port:br-data:eno1 br-ex:eno2
+        data-port: br-data:eno1 br-ex:eno2
   nova-cloud-controller:
     annotations:
       gui-x: '0'
