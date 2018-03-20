@@ -7,6 +7,8 @@ machines:
     series: xenial
   '3':
     series: xenial
+  '4':
+    series: xenial
 relations:
 - - nova-compute:amqp
   - rabbitmq-server:amqp
@@ -131,7 +133,7 @@ services:
     options:
       openstack-origin: cloud:xenial-queens
     to:
-    - lxd:2
+    - lxd:0
   ceilometer-agent:
     annotations:
       gui-x: '1250'
@@ -151,6 +153,7 @@ services:
     - lxd:1
     - lxd:2
     - lxd:3
+    - lxd:4
   ceph-osd:
     annotations:
       gui-x: '1000'
@@ -162,9 +165,11 @@ services:
       osd-reformat: 'yes'
       source: cloud:xenial-queens
     to:
+    - '0'
     - '1'
     - '2'
     - '3'
+    - '4'
   ceph-radosgw:
     annotations:
       gui-x: '1000'
@@ -187,7 +192,7 @@ services:
       openstack-origin: cloud:xenial-queens
       worker-multiplier: 0.25
     to:
-    - lxd:1
+    - lxd:0
   cinder-ceph:
     annotations:
       gui-x: '750'
@@ -204,12 +209,12 @@ services:
       openstack-origin: cloud:xenial-queens
       worker-multiplier: 0.25
     to:
-    - lxd:2
+    - lxd:0
   gnocchi:
     charm: cs:gnocchi-7
     num_units: 1
     to:
-    - lxd:1
+    - lxd:0
   keystone:
     annotations:
       gui-x: '500'
@@ -221,12 +226,12 @@ services:
       openstack-origin: cloud:xenial-queens
       worker-multiplier: 0.25
     to:
-    - lxd:3
+    - lxd:0
   memcached:
     charm: cs:memcached-18
     num_units: 1
     to:
-    - lxd:2
+    - lxd:0
   mysql:
     annotations:
       gui-x: '0'
@@ -250,7 +255,7 @@ services:
       openstack-origin: cloud:xenial-queens
       worker-multiplier: 0.25
     to:
-    - lxd:1
+    - lxd:0
   neutron-gateway:
     annotations:
       gui-x: '0'
@@ -287,7 +292,7 @@ services:
       openstack-origin: cloud:xenial-queens
       worker-multiplier: 0.25
     to:
-    - lxd:2
+    - lxd:0
   nova-compute:
     annotations:
       gui-x: '250'
@@ -305,6 +310,7 @@ services:
     - '1'
     - '2'
     - '3'
+    - '4'
   ntp:
     annotations:
       gui-x: '1000'
@@ -324,7 +330,7 @@ services:
       cinder-backup: true
       neutron-network-dvr: true
     to:
-    - lxd:3
+    - lxd:0
   rabbitmq-server:
     annotations:
       gui-x: '500'
