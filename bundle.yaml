@@ -250,7 +250,7 @@ services:
     charm: cs:neutron-api-258
     num_units: 1
     options:
-      flat-network-providers: physnet1
+      flat-network-providers: physnet1 external
       neutron-security-groups: true
       openstack-origin: cloud:xenial-queens
       worker-multiplier: 0.25
@@ -263,9 +263,9 @@ services:
     charm: cs:neutron-gateway-247
     num_units: 1
     options:
-        flat-network-providers: physnet1
-        bridge-mappings: physnet1:br-ex
-        data-port: br-ex:eno2
+        flat-network-providers: physnet1 external
+        bridge-mappings: external:br-ex physnet1:br-data
+        data-port: br-ex:eno2 br-data:ens6
         openstack-origin: cloud:xenial-queens
         worker-multiplier: 0.25
     to:
@@ -277,9 +277,9 @@ services:
     charm: cs:neutron-openvswitch-249
     num_units: 0
     options:
-        flat-network-providers: physnet1
-        bridge-mappings: physnet1:br-ex
-        data-port: br-ex:eno2
+        flat-network-providers: physnet1 external
+        bridge-mappings: external:br-ex physnet1:br-data
+        data-port: br-ex:eno2 br-data:ens6
   nova-cloud-controller:
     annotations:
       gui-x: '0'
